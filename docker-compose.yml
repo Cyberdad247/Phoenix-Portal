@@ -1,0 +1,29 @@
+version: '3.8'
+
+services:
+  websocket-server:
+    build: 
+      context: ./websocket-server
+      dockerfile: Dockerfile
+    ports:
+      - "3001:3001"
+    environment:
+      - NODE_ENV=production
+      - UPSTASH_REDIS_URL=${UPSTASH_REDIS_URL}
+      - WS_PORT=3001
+    restart: always
+
+  nextjs-app:
+    build: .
+    ports:
+      - "3000:3000"
+    environment:
+      - NEXT_PUBLIC_WS_URL=wss://ws.phoenixportal.com
+      - NEXT_PUBLIC_SITE_URL=https://phoenixportal.com
+    depends_on:
+      - websocket-server
+    restart: always
+
+networks:
+  default:
+    name: phoenix-network

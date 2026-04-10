@@ -1,0 +1,22 @@
+node_modules/
+.next/
+dist/
+.build/
+*.log
+.env
+.env.local
+.env.production
+
+# WebSocket server
+websocket-server/node_modules/
+websocket-server/dist/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
